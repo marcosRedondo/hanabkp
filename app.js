@@ -5,6 +5,7 @@ const {app, BrowserWindow} = require('electron')
     let mainWindow
 
     function createWindow () {
+      app.server = require(path.join(__dirname, '/server.js'))();
       mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -13,15 +14,8 @@ const {app, BrowserWindow} = require('electron')
         }
       })
       // ocultamos el menu
-      mainWindow.setMenu(null);
-
-      mainWindow.loadURL(
-        url.format({
-          pathname: path.join(__dirname, `/dist/hanabkp/browser/index.html`),
-          protocol: "file:",
-          slashes: true
-        })
-      );
+      
+      mainWindow.loadURL('http://localhost:3000/');
       // Open the DevTools.
       mainWindow.webContents.openDevTools()
 
