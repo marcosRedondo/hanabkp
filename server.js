@@ -1,16 +1,20 @@
 module.exports = () => {
-	var express = require('express');
-	var app = express();
-
-
-	// parser
-	var bodyParser = require('body-parser');
+	// Declarations
+	const bodyParser = require('body-parser');
+	const express = require('express');
+	const cors = require('cors');
+	
+	
+	// initialize express
+	let app = express();
 	app.use(bodyParser.json());
+	app.use(cors());
 
-	// Angular
+	// Static application angular
 	app.use('/', express.static(__dirname + "/dist/hanabkp/browser/"));
 
-	app.get('/export', (req, res) => {    
+	// methods
+	app.post('/export', (req, res) => {    
 		res.json(
 			{
 				"Title": "Hola mundo"
@@ -19,13 +23,13 @@ module.exports = () => {
 	})
 
 
-
-
 	app.listen(3000, function () {
 	  console.log('listening on port 3000...');
 	});
 }
 
+
+// Start server
 if(require.main === module){
 	const server = require('./server.js')
 	server();

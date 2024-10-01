@@ -1,7 +1,7 @@
 // ANGULAR
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 // PRIMENG
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 
 // MRM
 import { Database } from '@interfaces/database';
+import { HanaService } from '@app/services/hana.service';
 
 @Component({
   selector: 'app-connection',
@@ -29,11 +30,15 @@ import { Database } from '@interfaces/database';
 })
 export class ConnectionComponent {
 
+  private hanaService = inject(HanaService);
+
   // Variables
   public database: Database = { host: '', password: '', port: 0, username: '' };
 
   public export(): void {
-    alert('Exportando')
+    this.hanaService.export(this.database).subscribe((data: any)=>{
+      debugger;
+    });
   }
 
 }
