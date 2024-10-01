@@ -13,14 +13,8 @@ module.exports = () => {
 	// Static application angular
 	app.use('/', express.static(__dirname + "/dist/hanabkp/browser/"));
 
-	// methods
-	app.post('/export', (req, res) => {    
-		res.json(
-			{
-				"Title": "Hola mundo"
-			}
-		);
-	})
+	// controllers
+	app.use(require('./express/controllers/export.controller'));
 
 
 	app.listen(3000, function () {
